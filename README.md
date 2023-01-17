@@ -1,4 +1,4 @@
-# dust-intellisense README
+# DustJS Helpers README
 
 DustJS is primarily used for frontend development. To handle the eccentricities and quirks of the language, the following extension provides some features to reduce time required to develop component efficiently.
 
