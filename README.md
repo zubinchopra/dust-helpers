@@ -10,6 +10,7 @@ DustJS is primarily used for frontend development. To handle the eccentricities 
     ![ezgif com-gif-maker](https://user-images.githubusercontent.com/14044105/213060086-6c08f982-1865-49f5-9d66-937ad3872fa3.gif)
   * math helpers -> Generated templates for math helpers with operand, operation and key parameters. The expression also includes a nested `@eq` helper for evaluating the value developer would obtain from the computed expression. 
     * :add/ || :+/
+      ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/14044105/213060366-d2ba7f27-c195-402d-b8e7-b15ef498b1be.gif)
     * :subtract/ || :-/
     * :divide/ || ://
     * :multiply/ || :*/
