@@ -7,6 +7,7 @@ DustJS is primarily used for frontend development. To handle the eccentricities 
 * Autocomplete for import statements when open in a workspace.
 * Shorthand key combinations to generate code blocks for the following:
   * :addToContext/ -> Generates a template for add to context helper with name param
+    https://user-images.githubusercontent.com/14044105/213059923-984ab68f-68ca-4208-9cb7-2dbedbf40be1.mp4
   * math helpers -> Generated templates for math helpers with operand, operation and key parameters. The expression also includes a nested `@eq` helper for evaluating the value developer would obtain from the computed expression. 
     * :add/ || :+/
     * :subtract/ || :-/
