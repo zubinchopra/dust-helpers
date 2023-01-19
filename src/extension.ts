@@ -7,7 +7,8 @@ import {
   mathDisposable, 
   addToContextDisposable,
   selectDisposable,
-  componentDirectoryDisposable
+  componentDirectoryDisposable,
+  comparisonDisposable
 } from './completionsProvider';
 
 // This method is called when your extension is activated
@@ -19,7 +20,8 @@ export function activate(context: vscode.ExtensionContext) {
     mathDisposable,
     addToContextDisposable,
     selectDisposable,
-    componentDirectoryDisposable
+    componentDirectoryDisposable,
+    comparisonDisposable
   );
 }
 

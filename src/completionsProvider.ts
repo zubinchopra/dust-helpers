@@ -44,6 +44,11 @@ const completionsProvider = vscode.languages.registerCompletionItemProvider(
         return [selectCompletionItem];
       }
 
+      if (linePrefix.match(/:(lt|gt)\//) && editor) {
+        const comparisonCompletionItem = getcomparisonCompletionItem(editor, linePrefix);
+        return [comparisonCompletionItem];
+      }
+
       return undefined;
     }
   },
@@ -160,11 +165,30 @@ const getCurrentWorkingFolder = (editor: vscode.TextEditor) => {
   return snippetCompletion;
 };
 
+const getcomparisonCompletionItem = (editor: vscode.TextEditor, linePrefix: String) => {
+  const snippetCompletion = new vscode.CompletionItem('');
+  snippetCompletion.kind = vscode.CompletionItemKind.Snippet;
+  if (linePrefix.match(/:gt\//)) {
+    snippetCompletion.label = '@gt';
+  } else {
+    snippetCompletion.label = '@lt';
+  }
+
+  snippetCompletion.command = {
+    title: `Insert ${linePrefix.match(/:gt\//) ? 'greater than' : 'less than'} helper`,
+    command: ExtensionCommand.comparison,
+    arguments: [editor, '', linePrefix]
+  };
+
+  return snippetCompletion;
+};
+
 const eqDisposable = generateDisposable(ExtensionCommand.equality);
 const mathDisposable = generateDisposable(ExtensionCommand.math);
 const addToContextDisposable = generateDisposable(ExtensionCommand.addToContext);
 const selectDisposable = generateDisposable(ExtensionCommand.select);
 const componentDirectoryDisposable = generateDisposable(ExtensionCommand.componentDirectory);
+const comparisonDisposable = generateDisposable(ExtensionCommand.comparison);
 
 export { 
   completionsProvider,
@@ -172,5 +196,6 @@ export {
   mathDisposable,
   addToContextDisposable,
   selectDisposable,
-  componentDirectoryDisposable
+  componentDirectoryDisposable,
+  comparisonDisposable
 };

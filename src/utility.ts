@@ -5,25 +5,26 @@ enum ExtensionCommand {
   math = 'extension.insertMath',
   addToContext = 'extension.insertAddToContext',
   select = 'extension.insertSelect',
-  componentDirectory = 'extension.insertComponentDirectory'
+  componentDirectory = 'extension.insertComponentDirectory',
+  comparison = 'extension.insertComparison'
 }
 
 const generateDisposable = (extensionCommand: ExtensionCommand): vscode.Disposable => {
   return vscode.commands.registerCommand(
     extensionCommand, 
-    (editor: vscode.TextEditor, operatorSymbol?: String) => {
+    (editor: vscode.TextEditor, operatorSymbol: String = '', linePrefix: String = '') => {
       if (!editor) {
         return;
       }
 
       const range = getCurrentSelectionRangeFromStart(editor);
-      const snippetString = getSnippetString(extensionCommand, operatorSymbol);
+      const snippetString = getSnippetString(extensionCommand, operatorSymbol, linePrefix);
       editor.insertSnippet(snippetString, range);
     }
   );
 };
 
-const getSnippetString = (extensionCommand: ExtensionCommand, operatorSymbol?: String): vscode.SnippetString => {
+const getSnippetString = (extensionCommand: ExtensionCommand, operatorSymbol?: String, linePrefix?: String): vscode.SnippetString => {
   switch (extensionCommand) {
     case ExtensionCommand.equality:
       return new vscode.SnippetString(
@@ -56,8 +57,14 @@ const getSnippetString = (extensionCommand: ExtensionCommand, operatorSymbol?: S
       if (currentWorkingFolder) {
         snippetString.value = currentWorkingFolder[0];
       }
-
+      
       return snippetString;
+    case ExtensionCommand.comparison:
+      if (linePrefix?.match(/:gt\//)) {
+        return new vscode.SnippetString(`{@gt key="" value="" type=""}\n\t\n{/gt}`);
+      }
+
+      return new vscode.SnippetString(`{@lt key="" value="" type=""}\n\t\n{/lt}`);
     default:
       return new vscode.SnippetString('');
   }
